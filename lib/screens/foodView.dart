@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_design_2/theme.dart';
+import 'package:ui_design_2/utils/addSpacing.dart';
 
 class FoodView extends StatelessWidget {
   final Map<String, dynamic> productData;
@@ -14,59 +15,169 @@ class FoodView extends StatelessWidget {
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Container(
-              // margin: const EdgeInsets.only(top: 50),
+              width: constraints.maxWidth,
+              height: constraints.maxHeight,
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 physics: BouncingScrollPhysics(),
-                child: Column(
+                child: Stack(
+                  clipBehavior: Clip.none,
                   children: [
-                    Container(
-                      height: constraints.maxHeight * 0.4,
-                      color: COLOR_GREEN,
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                scale: 3,
-                                image: AssetImage(
-                                    "assets/images/${productData['image']}"),
+                    Column(
+                      children: [
+                        Container(
+                          height: constraints.maxHeight * 0.4,
+                          color: COLOR_GREEN,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    scale: 3,
+                                    image: AssetImage(
+                                        "assets/images/${productData['image']}"),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Container(
+                                margin: const EdgeInsets.only(
+                                  top: 20,
+                                  left: 20,
+                                ),
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.orange.shade200,
+                                  border: Border.all(
+                                    width: 1,
+                                    color: COLOR_ORANGE,
+                                  ),
+                                ),
+                                child: TextButton(
+                                  onPressed: () {
+                                    debugPrint("${constraints}");
+                                  },
+                                  child: Text(
+                                    "<",
+                                    style: textTheme.headline6!.copyWith(
+                                      color: Colors.orange,
+                                    ),
+                                  ),
+                                  style: ButtonStyle(
+                                    overlayColor:
+                                        MaterialStateColor.resolveWith(
+                                      (states) =>
+                                          Colors.orange.withOpacity(0.3),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                              top: 20,
-                              left: 20,
-                            ),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.orange.shade200,
-                              border: Border.all(
-                                width: 1,
-                                color: COLOR_ORANGE,
+                        ),
+                        addVerticalSpace(60),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 25,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${productData['name']}",
+                                    style: textTheme.headline6,
+                                  ),
+                                  addVerticalSpace(5),
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        WidgetSpan(
+                                          child: Icon(
+                                            Icons.location_on,
+                                            color: Colors.red,
+                                            size: 20,
+                                          ),
+                                          alignment:
+                                              PlaceholderAlignment.middle,
+                                        ),
+                                        WidgetSpan(
+                                          child: Text(
+                                            '${productData['rest']}',
+                                            style: textTheme.caption,
+                                          ),
+                                          alignment:
+                                              PlaceholderAlignment.middle,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "<",
-                                style: textTheme.headline6!.copyWith(
-                                  color: Colors.orange,
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: '${productData['currency']}',
+                                      style: textTheme.subtitle2!.apply(
+                                        fontWeightDelta: 4,
+                                        color: COLOR_ORANGE,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: '${productData['price']}',
+                                      style: textTheme.headline5!.apply(
+                                        color: COLOR_ORANGE,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              style: ButtonStyle(
-                                overlayColor: MaterialStateColor.resolveWith(
-                                  (states) => Colors.orange.withOpacity(0.3),
-                                ),
-                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Positioned(
+                      top: constraints.maxHeight * 0.37,
+                      right: 25,
+                      child: Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(70),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.red.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
-                          )
-                        ],
+                          ],
+                        ),
+                        child: Material(
+                          color: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(70.0),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              debugPrint("${constraints}");
+                            },
+                            child: Icon(
+                              Icons.favorite,
+                              color: Colors.white,
+                            ),
+                            borderRadius: BorderRadius.circular(70),
+                          ),
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
