@@ -5,8 +5,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(),
+      body: Container(
+        width: Size.width,
+        height: Size.height,
+      ),
     );
   }
 }
