@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_design_2/categories.dart';
 import 'package:ui_design_2/theme.dart';
 import 'package:ui_design_2/utils/addSpacing.dart';
 
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: LayoutBuilder(
         builder: (context, constraints) {
           return Container(
@@ -58,6 +60,10 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             TextField(
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 hintText: 'Search food items',
                                 hintStyle: TextStyle(
@@ -92,7 +98,8 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
-                            )
+                            ),
+                            addVerticalSpace(10),
                           ],
                         ),
                       )
@@ -103,6 +110,81 @@ class _HomePageState extends State<HomePage> {
                   width: constraints.maxHeight,
                   color: Colors.grey.shade100,
                   height: 400,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      bottom: 10,
+                    ),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Column(
+                          children: [
+                            // Margin before scrolling list
+                            addVerticalSpace(constraints.maxWidth * 0.35),
+                            Row(
+                              children: [
+                                Text(
+                                  'Popular Foods',
+                                  style: textTheme.headline5,
+                                ),
+                                Expanded(child: Center()),
+                                Text(
+                                  'View All >',
+                                  style: textTheme.subtitle2!.apply(
+                                    color: COLOR_ORANGE,
+                                  ),
+                                ),
+                                addHorizontalSpace(10),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Positioned(
+                          top: -constraints.maxWidth * 0.15,
+                          left: 0,
+                          child: Container(
+                            width: constraints.maxWidth,
+                            height: constraints.maxWidth * 0.35,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              physics: BouncingScrollPhysics(),
+                              children: CATEGORIES
+                                  .map(
+                                    (category) => Container(
+                                      margin: const EdgeInsets.only(
+                                        right: 10,
+                                      ),
+                                      width: constraints.maxWidth * 0.25,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                                'assets/images/${category['image']}'),
+                                            addVerticalSpace(10),
+                                            Text(
+                                              '${category['name']}',
+                                              style: textTheme.bodyText2!.apply(
+                                                color: COLOR_BLACK,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 )
               ],
             ),
