@@ -24,6 +24,7 @@ class FoodView extends StatelessWidget {
                   clipBehavior: Clip.none,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           height: constraints.maxHeight * 0.4,
@@ -139,7 +140,134 @@ class FoodView extends StatelessWidget {
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        addVerticalSpace(20),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 25,
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 2,
+                                color: Colors.grey.shade300,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 25,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          WidgetSpan(
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.star,
+                                                  color: COLOR_ORANGE,
+                                                ),
+                                                addHorizontalSpace(2),
+                                              ],
+                                            ),
+                                            alignment:
+                                                PlaceholderAlignment.middle,
+                                          ),
+                                          TextSpan(
+                                            text: "${productData['rating']}",
+                                            style: textTheme.subtitle2!.apply(
+                                              fontWeightDelta: 4,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          WidgetSpan(
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.punch_clock,
+                                                  color: Colors.red,
+                                                ),
+                                                addHorizontalSpace(2),
+                                              ],
+                                            ),
+                                            alignment:
+                                                PlaceholderAlignment.middle,
+                                          ),
+                                          TextSpan(
+                                            text:
+                                                "${productData['deliveryTime']}",
+                                            style: textTheme.subtitle2!.apply(
+                                              fontWeightDelta: 4,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          WidgetSpan(
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.green,
+                                                ),
+                                                addHorizontalSpace(2),
+                                              ],
+                                            ),
+                                            alignment:
+                                                PlaceholderAlignment.middle,
+                                          ),
+                                          TextSpan(
+                                            text: "${productData['distance']}",
+                                            style: textTheme.subtitle2!.apply(
+                                              fontWeightDelta: 4,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 2,
+                                color: Colors.grey.shade300,
+                              ),
+                            ],
+                          ),
+                        ),
+                        addVerticalSpace(20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 25,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Overview",
+                                style: textTheme.headline5,
+                              ),
+                              addVerticalSpace(10),
+                              Text(
+                                "${productData['description']}",
+                                style: textTheme.subtitle1!.copyWith(
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     Positioned(
