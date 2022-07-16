@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ui_design_2/screens/foodView.dart';
-import 'package:ui_design_2/screens/homePage.dart';
 import 'package:ui_design_2/productData.dart';
 import 'package:ui_design_2/theme.dart';
 
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Change app bar color
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: COLOR_GREEN),
+      const SystemUiOverlayStyle(statusBarColor: COLOR_GREEN),
     );
     return MaterialApp(
       title: 'Flutter Demo',

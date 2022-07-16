@@ -6,7 +6,7 @@ import 'package:ui_design_2/theme.dart';
 import 'package:ui_design_2/utils/addSpacing.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -24,10 +24,10 @@ class _HomePageState extends State<HomePage> {
             return Container(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: constraints.maxHeight * 0.40,
                       child: Stack(
                         fit: StackFit.expand,
@@ -66,13 +66,13 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 TextField(
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                   ),
                                   cursorColor: Colors.white,
                                   decoration: InputDecoration(
                                     hintText: 'Search food items',
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       color: Colors.white,
                                     ),
                                     border: OutlineInputBorder(
@@ -81,14 +81,14 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     filled: true,
                                     fillColor: Colors.white24,
-                                    prefixIcon: Icon(
+                                    prefixIcon: const Icon(
                                       Icons.search,
                                       color: Colors.white,
                                     ),
                                     suffixIcon: Container(
                                       width: 70,
                                       height: 70,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Colors.white24,
                                         borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(20),
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                                         onPressed: () {
                                           debugPrint("${constraints.maxWidth}");
                                         },
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.menu,
                                           color: Colors.white,
                                         ),
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                                       'Popular Foods',
                                       style: textTheme.headline5,
                                     ),
-                                    Expanded(child: Center()),
+                                    const Expanded(child: Center()),
                                     Text(
                                       'View All >',
                                       style: textTheme.subtitle2!.apply(
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                                 addVerticalSpace(10),
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   child: Row(
                                     children: PRODUCT_DATA
                                         .map(
@@ -172,12 +172,12 @@ class _HomePageState extends State<HomePage> {
                             Positioned(
                               top: -constraints.maxWidth * 0.15,
                               left: 0,
-                              child: Container(
+                              child: SizedBox(
                                 width: constraints.maxWidth,
                                 height: constraints.maxWidth * 0.35,
                                 child: ListView(
                                   scrollDirection: Axis.horizontal,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   children: CATEGORIES
                                       .map(
                                         (category) => Container(

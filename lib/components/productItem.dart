@@ -49,7 +49,7 @@ class ProductItem extends StatelessWidget {
                     width: width * 0.80,
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: Center(),
                 ),
                 Text(
@@ -60,7 +60,7 @@ class ProductItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     children: [
-                      WidgetSpan(
+                      const WidgetSpan(
                         child: Icon(
                           Icons.location_on,
                           color: Colors.red,
@@ -83,7 +83,7 @@ class ProductItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(
                           children: [
-                            WidgetSpan(
+                            const WidgetSpan(
                               child: Icon(
                                 Icons.star,
                                 color: COLOR_ORANGE,

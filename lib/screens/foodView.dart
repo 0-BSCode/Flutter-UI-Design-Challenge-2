@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui_design_2/theme.dart';
 import 'package:ui_design_2/utils/addSpacing.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 
 class FoodView extends StatelessWidget {
   final Map<String, dynamic> productData;
@@ -14,7 +15,7 @@ class FoodView extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: LayoutBuilder(
           builder: (context, constraints) {
-            return Container(
+            return SizedBox(
               width: constraints.maxWidth,
               height: constraints.maxHeight,
               child: Column(
@@ -22,7 +23,7 @@ class FoodView extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Stack(
                         clipBehavior: Clip.none,
                         children: [
@@ -61,19 +62,19 @@ class FoodView extends StatelessWidget {
                                       ),
                                       child: TextButton(
                                         onPressed: () {
-                                          debugPrint("${constraints}");
+                                          debugPrint("$constraints");
                                         },
-                                        child: Text(
-                                          "<",
-                                          style: textTheme.headline6!.copyWith(
-                                            color: Colors.orange,
-                                          ),
-                                        ),
                                         style: ButtonStyle(
                                           overlayColor:
                                               MaterialStateColor.resolveWith(
                                             (states) =>
                                                 Colors.orange.withOpacity(0.3),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          "<",
+                                          style: textTheme.headline6!.copyWith(
+                                            color: Colors.orange,
                                           ),
                                         ),
                                       ),
@@ -102,7 +103,7 @@ class FoodView extends StatelessWidget {
                                         RichText(
                                           text: TextSpan(
                                             children: [
-                                              WidgetSpan(
+                                              const WidgetSpan(
                                                 child: Icon(
                                                   Icons.location_on,
                                                   color: Colors.red,
@@ -148,7 +149,7 @@ class FoodView extends StatelessWidget {
                               ),
                               addVerticalSpace(20),
                               Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 25,
                                 ),
                                 child: Column(
@@ -171,7 +172,7 @@ class FoodView extends StatelessWidget {
                                                 WidgetSpan(
                                                   child: Row(
                                                     children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons.star,
                                                         color: COLOR_ORANGE,
                                                       ),
@@ -199,7 +200,7 @@ class FoodView extends StatelessWidget {
                                                 WidgetSpan(
                                                   child: Row(
                                                     children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons.punch_clock,
                                                         color: Colors.red,
                                                       ),
@@ -227,7 +228,7 @@ class FoodView extends StatelessWidget {
                                                 WidgetSpan(
                                                   child: Row(
                                                     children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons.location_on,
                                                         color: Colors.green,
                                                       ),
@@ -296,7 +297,7 @@ class FoodView extends StatelessWidget {
                                     color: Colors.red.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset: Offset(
+                                    offset: const Offset(
                                         0, 3), // changes position of shadow
                                   ),
                                 ],
@@ -308,13 +309,13 @@ class FoodView extends StatelessWidget {
                                 ),
                                 child: InkWell(
                                   onTap: () {
-                                    debugPrint("${constraints}");
+                                    debugPrint("$constraints");
                                   },
-                                  child: Icon(
+                                  borderRadius: BorderRadius.circular(70),
+                                  child: const Icon(
                                     Icons.favorite,
                                     color: Colors.white,
                                   ),
-                                  borderRadius: BorderRadius.circular(70),
                                 ),
                               ),
                             ),
@@ -324,14 +325,44 @@ class FoodView extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 60,
-                    color: Colors.red,
+                    height: 95,
+                    color: Colors.white,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 25,
-                      vertical: 10,
+                      vertical: 5,
                     ),
-                    child: Container(
-                      color: Colors.white,
+                    child: ListView(
+                      children: <Widget>[
+                        Builder(
+                          builder: (context) {
+                            final GlobalKey<SlideActionState> key = GlobalKey();
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SlideAction(
+                                key: key,
+                                borderRadius: 20,
+                                innerColor: COLOR_GREEN,
+                                outerColor: Colors.grey.shade100,
+                                elevation: 0,
+                                text: "Add to cart",
+                                textStyle: textTheme.headline6!.copyWith(
+                                  color: COLOR_GREEN,
+                                ),
+                                sliderButtonIcon: Icon(
+                                  Icons.shopping_cart,
+                                  color: Colors.white,
+                                ),
+                                onSubmit: () {
+                                  Future.delayed(
+                                    const Duration(seconds: 1),
+                                    () => key.currentState?.reset(),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ],
