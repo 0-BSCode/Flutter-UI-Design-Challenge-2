@@ -62,7 +62,7 @@ class FoodView extends StatelessWidget {
                                       ),
                                       child: TextButton(
                                         onPressed: () {
-                                          debugPrint("$constraints");
+                                          Navigator.of(context).pop();
                                         },
                                         style: ButtonStyle(
                                           overlayColor:

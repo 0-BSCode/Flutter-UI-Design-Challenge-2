@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ui_design_2/screens/foodView.dart';
 import 'package:ui_design_2/productData.dart';
+import 'package:ui_design_2/screens/homePage.dart';
 import 'package:ui_design_2/theme.dart';
 
 void main() {
@@ -24,10 +25,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: defaultText,
       ),
-      home: FoodView(
-        productData: PRODUCT_DATA[0],
-      ),
-      // home: HomePage(),
+      // home: FoodView(
+      //   productData: PRODUCT_DATA[0],
+      // ),
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
